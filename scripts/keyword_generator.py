@@ -19,7 +19,6 @@ except ImportError:
     print("请安装: pip install pypinyin")
     sys.exit(1)
 
-
 class KeywordGenerator:
     def __init__(self, model_dir: Path):
         """初始化唤醒词生成器.
