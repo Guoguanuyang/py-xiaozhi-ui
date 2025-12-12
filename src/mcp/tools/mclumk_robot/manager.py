@@ -18,7 +18,7 @@ from .Car_base_control import (
     Car_left_translation, Car_right_translation,
     Car_servo_nod, Car_servo_sayno,
     Car_RGB_Control, Close_RGB,
-    Car_Reset, take_photo_agent
+    Car_Reset, take_photo_agent, Car_dance
 )
 
 logger = get_logger(__name__)
@@ -78,6 +78,9 @@ class MclumkRobotManager:
 
             # 注册拍照工具
             self._register_take_photo_tool(add_tool, PropertyList)
+
+            # 注册跳舞工具
+            self._register_dance_tool(add_tool, PropertyList)
 
             self._initialized = True
             logger.info("[MclumkRobotManager] 麦克纳姆轮小车工具注册完成")
@@ -364,6 +367,25 @@ class MclumkRobotManager:
             )
         )
         logger.debug("[MclumkRobotManager] 注册拍照工具成功")
+
+    def _register_dance_tool(self, add_tool, PropertyList):
+        """
+        注册跳舞工具.
+        """
+
+        def dance_wrapper(args: Dict[str, Any]) -> str:
+            Car_dance()
+            return "小车已开始跳舞"
+
+        add_tool(
+            (
+                "mclumk_robot.dance",
+                "控制小车执行跳舞动作，持续约20秒，包含灯光和摇头动作。",
+                PropertyList(),
+                dance_wrapper,
+            )
+        )
+        logger.debug("[MclumkRobotManager] 注册跳舞工具成功")
 
     def is_initialized(self) -> bool:
         """
