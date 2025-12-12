@@ -353,6 +353,12 @@ class McpServer:
         bazi_manager = get_bazi_manager()
         bazi_manager.init_tools(self.add_tool, PropertyList, Property, PropertyType)
 
+        # 添加麦克纳姆轮小车工具
+        from src.mcp.tools.mclumk_robot import get_mclumk_robot_manager
+
+        robot_manager = get_mclumk_robot_manager()
+        robot_manager.init_tools(self.add_tool, PropertyList, Property, PropertyType)
+
         # 恢复原有工具
         self.tools.extend(original_tools)
 
