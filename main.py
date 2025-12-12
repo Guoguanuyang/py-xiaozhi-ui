@@ -33,7 +33,6 @@ def parse_args():
     )
     return parser.parse_args()
 
-
 async def handle_activation(mode: str) -> bool:
     """处理设备激活流程，依赖已有事件循环.
 
